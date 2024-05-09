@@ -3,10 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})
-    ->middleware('auth:sanctum');
+//Route::get('/user', function (Request $request) {
+//    return $request->user();
+//})
+//    ->middleware('auth:sanctum');
 
 
 Route::get('/hello', function (){
@@ -16,7 +16,6 @@ Route::get('/hello', function (){
         'array' => [1, 2, 3, 4, 5, 6]
     ]);
 });
-
 
 Route::get('/test-error', function () {
 
@@ -48,7 +47,6 @@ Route::get('/test-error', function () {
     }
 });
 
-
 Route::get('/payload', function () {
 
     return response()->json([
@@ -63,3 +61,13 @@ Route::get('/payload', function () {
 
 
 });
+
+Route::get('/user', [
+    \App\Http\Controllers\Api\UserAuthController::class,
+    'getUser'
+])->middleware('auth:sanctum');
+
+Route::post('/user', [
+    \App\Http\Controllers\Api\UserAuthController::class,
+    'createUser'
+]);
